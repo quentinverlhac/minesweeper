@@ -1,2 +1,2 @@
-minesweeper : main.cc
-	g++ main.cc -o minesweeper
+minesweeper : src/main.cc
+	g++ src/main.cc -o build/minesweeper
