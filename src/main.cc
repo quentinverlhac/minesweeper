@@ -1,6 +1,8 @@
-#include <iostream>
+#include "GameController.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "hello world!" << std::endl;
+    GameController controller = GameController();
+    controller.run();
+    return 0;
 }
