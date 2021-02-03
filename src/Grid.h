@@ -8,10 +8,13 @@ struct Vector2
 
 class Grid
 {
-    Vector2 dimensions;
+    Vector2 m_dimensions;
+    int m_numberOfMines;
 
 public:
-    Grid(Vector2 dimensions);
+    Grid(Vector2 dimensions, int numberOfMines);
     ~Grid();
     Vector2 getDimensions();
+    int getNumberOfMines();
+    void initializeMines();
 };

@@ -8,7 +8,7 @@ private:
 
 public:
     GameController();
-    GameController(int height, int width);
+    GameController(int height, int width, int numberOfMines);
     ~GameController();
     void run();
 };
