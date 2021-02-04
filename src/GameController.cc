@@ -22,4 +22,5 @@ void GameController::run()
     std::cout << "Dimensions: " << this->grid.getDimensions().i << " x " << this->grid.getDimensions().j << std::endl;
     std::cout << "Number of mines: " << this->grid.getNumberOfMines() << std::endl;
     std::cout << "Is cell (3,5) a mine ? " << this->grid.getCell({3, 5})->isMine << std::endl;
+    this->grid.initializeMines();
 }
