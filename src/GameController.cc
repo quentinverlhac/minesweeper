@@ -8,7 +8,7 @@ const int DEFAULT_NUMBER_OF_MINES = 16;
 
 GameController::GameController() : GameController(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_NUMBER_OF_MINES){};
 
-GameController::GameController(int height, int width, int numberOfMines) : grid(Grid({height, width}, numberOfMines))
+GameController::GameController(int height, int width, int numberOfMines) : grid(Grid({height, width}, numberOfMines)), m_cli(CLI(grid))
 {
 }
 
@@ -21,6 +21,6 @@ void GameController::run()
     std::cout << "-- Minesweeper --" << std::endl;
     std::cout << "Dimensions: " << this->grid.getDimensions().i << " x " << this->grid.getDimensions().j << std::endl;
     std::cout << "Number of mines: " << this->grid.getNumberOfMines() << std::endl;
-    std::cout << "Is cell (3,5) a mine ? " << this->grid.getCell({3, 5})->isMine << std::endl;
     this->grid.initializeMines();
+    this->m_cli.update();
 }
