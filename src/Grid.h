@@ -17,6 +17,7 @@ public:
     Grid(Vector2 dimensions, int numberOfMines);
     ~Grid();
     Vector2 getDimensions();
+    int getNumberOfCells();
     int getNumberOfMines();
     void initializeMines();
     Cell *getCell(Vector2 coordinates);

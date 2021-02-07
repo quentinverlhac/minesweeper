@@ -4,7 +4,7 @@
 
 Grid::Grid(Vector2 dimensions, int numberOfMines) : m_dimensions(dimensions), m_numberOfMines(numberOfMines)
 {
-    this->m_cells = new Cell[this->m_dimensions.i * this->m_dimensions.j];
+    this->m_cells = new Cell[this->getNumberOfCells()];
 };
 
 Grid::~Grid()
@@ -25,6 +25,11 @@ Cell *Grid::getCell(Vector2 coordinates)
 Vector2 Grid::getDimensions()
 {
     return this->m_dimensions;
+}
+
+int Grid::getNumberOfCells()
+{
+    return this->m_dimensions.i * this->m_dimensions.j;
 }
 
 int Grid::getNumberOfMines()
@@ -48,7 +53,7 @@ void Grid::initializeMines()
         }
         else
         {
-            // rdm is in the set, but i is not
+            // rdm is in the set, but i is not because it can be sampled for the first time
             set.insert(i);
             this->m_cells[i].isMine = true;
         }
