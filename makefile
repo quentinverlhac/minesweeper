@@ -1,5 +1,8 @@
-minesweeper : main.o GameController.o Grid.o CLI.o
+minesweeper : build main.o GameController.o Grid.o CLI.o
 	g++ -std=c++17 build/main.o build/GameController.o build/Grid.o build/CLI.o -o minesweeper
+
+build:
+	mkdir $@
 
 main.o : src/main.cc src/GameController.h
 	g++ -std=c++17 -c src/main.cc -o build/main.o 
