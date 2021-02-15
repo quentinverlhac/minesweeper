@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Grid.h"
 
 class CLI
@@ -12,5 +13,6 @@ public:
     void update();
     void displayGrid();
     char getCellChar(Cell *cell);
-    void promptNextMove();
+    Vector2 promptNextMove();
+    int promptInt(std::string prompt);
 };

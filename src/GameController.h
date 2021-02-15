@@ -13,4 +13,5 @@ public:
     GameController(int height, int width, int numberOfMines);
     ~GameController();
     void run();
+    void processNextMove();
 };

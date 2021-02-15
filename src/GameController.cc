@@ -23,4 +23,11 @@ void GameController::run()
     std::cout << "Number of mines: " << this->grid.getNumberOfMines() << std::endl;
     this->grid.initializeMines();
     this->m_cli.update();
+    this->processNextMove();
+}
+
+void GameController::processNextMove()
+{
+    auto move = this->m_cli.promptNextMove();
+    std::cout << "Move: " << move.i << "," << move.j << std::endl;
 }

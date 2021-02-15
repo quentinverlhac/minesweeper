@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "CLI.h"
 
 const char DEFAULT_UNREVEALED_CELL = '.';
@@ -11,7 +12,7 @@ CLI::~CLI(){};
 
 void CLI::update()
 {
-    displayGrid();
+    this->displayGrid();
 };
 
 void CLI::displayGrid()
@@ -50,4 +51,27 @@ char CLI::getCellChar(Cell *cell)
     }
 };
 
-void CLI::promptNextMove(){};
+int CLI::promptInt(std::string prompt)
+{
+    int output;
+    for (std::string line; std::cout << prompt && std::getline(std::cin, line);)
+    {
+        std::istringstream iss(line);
+        if (iss >> output && iss.get() == EOF)
+        {
+            return output;
+        }
+        else
+        {
+            std::cerr << "Cannot parse input. Received '" << line << "'. Should be an integer." << std::endl;
+        }
+    }
+}
+
+Vector2 CLI::promptNextMove()
+{
+    std::cout << "Next move ?" << std::endl;
+    int row = this->promptInt("Enter a row: ");
+    int column = this->promptInt("Enter a column: ");
+    return {row, column};
+};
