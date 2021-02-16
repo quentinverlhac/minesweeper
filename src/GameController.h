@@ -22,5 +22,8 @@ public:
     GameController(int height, int width, int numberOfMines);
     ~GameController();
     void run();
+    void initialiseGame();
+    void update();
+    void endGame();
     void processNextMove();
 };

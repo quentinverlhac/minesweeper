@@ -18,16 +18,31 @@ GameController::~GameController()
 
 void GameController::run()
 {
+    this->initialiseGame();
+    this->m_gameState = gameplay;
+    while (this->m_gameState == gameplay)
+    {
+        this->update();
+    }
+    this->endGame();
+}
+
+void GameController::initialiseGame()
+{
     std::cout << "-- Minesweeper --" << std::endl;
     std::cout << "Dimensions: " << this->m_grid.getDimensions().i << " x " << this->m_grid.getDimensions().j << std::endl;
     std::cout << "Number of mines: " << this->m_grid.getNumberOfMines() << std::endl;
     this->m_grid.initializeMines();
-    this->m_gameState = gameplay;
-    while (this->m_gameState == gameplay)
-    {
-        this->m_cli.update();
-        this->processNextMove();
-    }
+}
+
+void GameController::update()
+{
+    this->m_cli.update();
+    this->processNextMove();
+}
+
+void GameController::endGame()
+{
     if (this->m_hasLost)
     {
         std::cout << "Game over!";
