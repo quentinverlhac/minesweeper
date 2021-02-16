@@ -51,6 +51,7 @@ char CLI::getCellChar(Cell *cell)
     }
 };
 
+// promptInt displays the prompt and returns the int input by the user
 int CLI::promptInt(std::string prompt)
 {
     int output;
@@ -59,13 +60,14 @@ int CLI::promptInt(std::string prompt)
         std::istringstream iss(line);
         if (iss >> output && iss.get() == EOF)
         {
-            return output;
+            break;
         }
         else
         {
             std::cerr << "Cannot parse input. Received '" << line << "'. Should be an integer." << std::endl;
         }
     }
+    return output;
 }
 
 Vector2 CLI::promptNextMove()
