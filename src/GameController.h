@@ -2,10 +2,19 @@
 #include "Grid.h"
 #include "CLI.h"
 
+enum GameState
+{
+    init,
+    gameplay,
+    end,
+};
+
 class GameController
 {
 private:
-    Grid grid;
+    GameState m_gameState;
+    bool m_hasLost;
+    Grid m_grid;
     CLI m_cli;
 
 public:

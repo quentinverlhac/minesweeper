@@ -2,13 +2,13 @@
 #include "GameController.h"
 #include "Grid.h"
 
-const int DEFAULT_HEIGHT = 16;
-const int DEFAULT_WIDTH = 16;
-const int DEFAULT_NUMBER_OF_MINES = 16;
+const int DEFAULT_HEIGHT = 4;
+const int DEFAULT_WIDTH = 4;
+const int DEFAULT_NUMBER_OF_MINES = 4;
 
 GameController::GameController() : GameController(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_NUMBER_OF_MINES){};
 
-GameController::GameController(int height, int width, int numberOfMines) : grid(Grid({height, width}, numberOfMines)), m_cli(CLI(grid))
+GameController::GameController(int height, int width, int numberOfMines) : m_grid(Grid({height, width}, numberOfMines)), m_cli(CLI(m_grid)), m_gameState(init), m_hasLost(false)
 {
 }
 
@@ -19,15 +19,32 @@ GameController::~GameController()
 void GameController::run()
 {
     std::cout << "-- Minesweeper --" << std::endl;
-    std::cout << "Dimensions: " << this->grid.getDimensions().i << " x " << this->grid.getDimensions().j << std::endl;
-    std::cout << "Number of mines: " << this->grid.getNumberOfMines() << std::endl;
-    this->grid.initializeMines();
-    this->m_cli.update();
-    this->processNextMove();
+    std::cout << "Dimensions: " << this->m_grid.getDimensions().i << " x " << this->m_grid.getDimensions().j << std::endl;
+    std::cout << "Number of mines: " << this->m_grid.getNumberOfMines() << std::endl;
+    this->m_grid.initializeMines();
+    this->m_gameState = gameplay;
+    while (this->m_gameState == gameplay)
+    {
+        this->m_cli.update();
+        this->processNextMove();
+    }
+    if (this->m_hasLost)
+    {
+        std::cout << "Game over!";
+    }
+    else
+    {
+        std::cout << "You won!";
+    }
 }
 
 void GameController::processNextMove()
 {
     auto move = this->m_cli.promptNextMove();
     std::cout << "Move: " << move.i << "," << move.j << std::endl;
+    this->m_hasLost = this->m_grid.processMove(move);
+    if (this->m_hasLost)
+    {
+        this->m_gameState = end;
+    }
 }

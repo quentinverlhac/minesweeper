@@ -59,3 +59,17 @@ void Grid::initializeMines()
         }
     }
 }
+
+bool Grid::processMove(Vector2 move)
+{
+    auto cell = this->getCell(move);
+    cell->isRevealed = true;
+    if (cell->isMine)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
