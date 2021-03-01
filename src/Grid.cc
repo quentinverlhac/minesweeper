@@ -45,7 +45,7 @@ void Grid::initializeMines()
     for (int i = this->m_dimensions.i * this->m_dimensions.j - this->m_numberOfMines; i < this->m_dimensions.i * this->m_dimensions.j; i++)
     {
         int rdm = std::uniform_int_distribution<>(1, i)(gen);
-        if (set.find(rdm) != set.end())
+        if (set.find(rdm) == set.end())
         {
             // rdm is not in the set
             set.insert(rdm);
