@@ -43,14 +43,7 @@ void GameController::update()
 
 void GameController::endGame()
 {
-    if (this->m_hasLost)
-    {
-        std::cout << "Game over!";
-    }
-    else
-    {
-        std::cout << "You won!";
-    }
+    this->m_cli.endGame(this->m_hasLost);
 }
 
 void GameController::processNextMove()

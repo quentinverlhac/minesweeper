@@ -11,6 +11,7 @@ public:
     CLI(Grid &grid);
     ~CLI();
     void update();
+    void endGame(bool hasLost);
     void displayGrid();
     char getCellChar(Cell *cell);
     Vector2 promptNextMove();

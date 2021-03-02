@@ -15,6 +15,19 @@ void CLI::update()
     this->displayGrid();
 };
 
+void CLI::endGame(bool hasLost)
+{
+    this->update();
+    if (hasLost)
+    {
+        std::cout << "Game over!" << std::endl;
+    }
+    else
+    {
+        std::cout << "You won!" << std::endl;
+    }
+};
+
 void CLI::displayGrid()
 {
     for (int i = 0; i < this->m_grid.getDimensions().i; i++)
