@@ -2,6 +2,7 @@
 #include "GameController.h"
 #include "Grid.h"
 
+// Game default settings
 const int DEFAULT_HEIGHT = 4;
 const int DEFAULT_WIDTH = 4;
 const int DEFAULT_NUMBER_OF_MINES = 4;
@@ -16,6 +17,7 @@ GameController::~GameController()
 {
 }
 
+// run is the main game loop.
 void GameController::run()
 {
     this->initialiseGame();
