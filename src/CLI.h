@@ -10,6 +10,7 @@ private:
 public:
     CLI(Grid &grid);
     ~CLI();
+    void initialiseGame();
     void update();
     void endGame(bool hasLost);
     void displayGrid();

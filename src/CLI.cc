@@ -10,6 +10,13 @@ CLI::CLI(Grid &grid) : m_grid(grid){};
 
 CLI::~CLI(){};
 
+void CLI::initialiseGame()
+{
+    std::cout << "-- Minesweeper --" << std::endl;
+    std::cout << "Dimensions: " << this->m_grid.getDimensions().i << " x " << this->m_grid.getDimensions().j << std::endl;
+    std::cout << "Number of mines: " << this->m_grid.getNumberOfMines() << std::endl;
+}
+
 void CLI::update()
 {
     this->displayGrid();
@@ -88,5 +95,6 @@ Vector2 CLI::promptNextMove()
     std::cout << "Next move ?" << std::endl;
     int row = this->promptInt("Enter a row: ");
     int column = this->promptInt("Enter a column: ");
+    std::cout << "Move: " << row << "," << column << std::endl;
     return {row, column};
 };
