@@ -33,5 +33,6 @@ public:
     int getNumberOfCells();
     int getNumberOfMines();
     void initializeMines();
-    bool processMove(Vector2 move);
+    bool processMove(Vector2 coordinates);
+    int countAdjacentMines(Vector2 coordinates);
 };

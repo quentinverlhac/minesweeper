@@ -191,9 +191,10 @@ void Grid::initializeMines()
     }
 }
 
-bool Grid::processMove(Vector2 move)
+// processMove evaluates the player move by revealing the target cell and the adjacent cells if relevant
+bool Grid::processMove(Vector2 coordinates)
 {
-    auto cell = this->getCell(move);
+    auto cell = this->getCell(coordinates);
     cell->isRevealed = true;
     if (cell->isMine)
     {
@@ -201,6 +202,31 @@ bool Grid::processMove(Vector2 move)
     }
     else
     {
+        cell->hintLabel = this->countAdjacentMines(coordinates);
+        if (cell->hintLabel == 0)
+        {
+            // adjacent cells are revealed, and so on.. until revealing cells that have adjacent mines
+            auto adjacentCoordinates = this->getAdjacentCoordinates(coordinates, false);
+            for (auto i = adjacentCoordinates.begin(); i != adjacentCoordinates.end(); ++i)
+            {
+                this->processMove(*i);
+            }
+        }
         return false;
     }
+}
+
+int Grid::countAdjacentMines(Vector2 coordinates)
+{
+    int count = 0;
+    auto adjacentCoordinates = this->getAdjacentCoordinates(coordinates, true);
+    for (auto i = adjacentCoordinates.begin(); i != adjacentCoordinates.end(); ++i)
+    {
+        Cell *cell = this->getCell(*i);
+        if (cell->isMine)
+        {
+            count++;
+        }
+    }
+    return count;
 }
