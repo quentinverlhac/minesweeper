@@ -23,45 +23,45 @@ Cell *Grid::getCell(Vector2 coordinates)
     return &(this->m_cells[coordinates.i * m_dimensions.j + coordinates.j]);
 }
 
-// getAdjacentCells returns a vector of pointers to the cells that are adjacent to the given coordinates. It takes the Grid dimensions into account.
-std::vector<Cell *> Grid::getAdjacentCells(Vector2 coordinates, bool includeDiagonals)
+// getAdjacentCoordinates returns a vector of pointers to coordinates that are adjacent to the given coordinates. It takes the Grid limits into account.
+std::vector<Vector2> Grid::getAdjacentCoordinates(Vector2 coordinates, bool includeDiagonals)
 {
-    std::vector<Cell *> adjacentCells = std::vector<Cell *>(3); // 3 is the minimum number of cells to return
+    std::vector<Vector2> adjacentCells = std::vector<Vector2>(3); // 3 is the minimum number of cells to return
     if (coordinates.i == 0)
     {
         // top
         if (coordinates.j == 0)
         {
             // top left
-            adjacentCells.push_back(this->getCell(coordinates.right()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.right());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.bottomRight()));
+                adjacentCells.push_back(coordinates.bottomRight());
             }
             return adjacentCells;
         }
         else if (coordinates.j == this->m_dimensions.j - 1)
         {
             // top right
-            adjacentCells.push_back(this->getCell(coordinates.left()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.left());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.bottomLeft()));
+                adjacentCells.push_back(coordinates.bottomLeft());
             }
             return adjacentCells;
         }
         else
         {
             // top middle
-            adjacentCells.push_back(this->getCell(coordinates.left()));
-            adjacentCells.push_back(this->getCell(coordinates.right()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.left());
+            adjacentCells.push_back(coordinates.right());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.bottomLeft()));
-                adjacentCells.push_back(this->getCell(coordinates.bottomRight()));
+                adjacentCells.push_back(coordinates.bottomLeft());
+                adjacentCells.push_back(coordinates.bottomRight());
             }
             return adjacentCells;
         }
@@ -72,35 +72,35 @@ std::vector<Cell *> Grid::getAdjacentCells(Vector2 coordinates, bool includeDiag
         if (coordinates.j == 0)
         {
             // bottom left
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.right()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.right());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topRight()));
+                adjacentCells.push_back(coordinates.topRight());
             }
             return adjacentCells;
         }
         else if (coordinates.j == this->m_dimensions.j - 1)
         {
             // bottom right
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.left()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.left());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topLeft()));
+                adjacentCells.push_back(coordinates.topLeft());
             }
             return adjacentCells;
         }
         else
         {
             // bottom middle
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.left()));
-            adjacentCells.push_back(this->getCell(coordinates.right()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.left());
+            adjacentCells.push_back(coordinates.right());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topLeft()));
-                adjacentCells.push_back(this->getCell(coordinates.topRight()));
+                adjacentCells.push_back(coordinates.topLeft());
+                adjacentCells.push_back(coordinates.topRight());
             }
             return adjacentCells;
         }
@@ -111,42 +111,42 @@ std::vector<Cell *> Grid::getAdjacentCells(Vector2 coordinates, bool includeDiag
         if (coordinates.j == 0)
         {
             // middle left
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.right()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.right());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topRight()));
-                adjacentCells.push_back(this->getCell(coordinates.bottomRight()));
+                adjacentCells.push_back(coordinates.topRight());
+                adjacentCells.push_back(coordinates.bottomRight());
             }
             return adjacentCells;
         }
         else if (coordinates.j == this->m_dimensions.j - 1)
         {
             // middle right
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.left()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.left());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topLeft()));
-                adjacentCells.push_back(this->getCell(coordinates.bottomLeft()));
+                adjacentCells.push_back(coordinates.topLeft());
+                adjacentCells.push_back(coordinates.bottomLeft());
             }
             return adjacentCells;
         }
         else
         {
             // in the middle
-            adjacentCells.push_back(this->getCell(coordinates.top()));
-            adjacentCells.push_back(this->getCell(coordinates.left()));
-            adjacentCells.push_back(this->getCell(coordinates.right()));
-            adjacentCells.push_back(this->getCell(coordinates.bottom()));
+            adjacentCells.push_back(coordinates.top());
+            adjacentCells.push_back(coordinates.left());
+            adjacentCells.push_back(coordinates.right());
+            adjacentCells.push_back(coordinates.bottom());
             if (includeDiagonals)
             {
-                adjacentCells.push_back(this->getCell(coordinates.topLeft()));
-                adjacentCells.push_back(this->getCell(coordinates.topRight()));
-                adjacentCells.push_back(this->getCell(coordinates.bottomLeft()));
-                adjacentCells.push_back(this->getCell(coordinates.bottomRight()));
+                adjacentCells.push_back(coordinates.topLeft());
+                adjacentCells.push_back(coordinates.topRight());
+                adjacentCells.push_back(coordinates.bottomLeft());
+                adjacentCells.push_back(coordinates.bottomRight());
             }
             return adjacentCells;
         }

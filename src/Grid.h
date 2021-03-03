@@ -28,7 +28,7 @@ public:
     Grid(Vector2 dimensions, int numberOfMines);
     ~Grid();
     Cell *getCell(Vector2 coordinates);
-    std::vector<Cell *> getAdjacentCells(Vector2 coordinates, bool includeDiagonals);
+    std::vector<Vector2> getAdjacentCoordinates(Vector2 coordinates, bool includeDiagonals);
     Vector2 getDimensions();
     int getNumberOfCells();
     int getNumberOfMines();
