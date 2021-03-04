@@ -50,7 +50,7 @@ void GameController::processNextMove()
 {
     auto move = this->m_cli.promptNextMove();
     this->m_hasLost = this->m_grid.processMove(move);
-    if (this->m_hasLost)
+    if (this->m_hasLost || this->m_grid.getNumberOfRemainingEmptyCells() == 0)
     {
         this->m_gameState = end;
     }

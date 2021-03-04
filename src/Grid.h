@@ -22,6 +22,7 @@ class Grid
 {
     Vector2 m_dimensions;
     int m_numberOfMines;
+    int m_numberOfCellsRevealed;
     Cell *m_cells; // TODO use smart_pointers to protect this
 
 public:
@@ -32,6 +33,8 @@ public:
     Vector2 getDimensions();
     int getNumberOfCells();
     int getNumberOfMines();
+    int getNumberOfEmptyCells();
+    int getNumberOfRemainingEmptyCells();
     void initializeMines();
     bool processMove(Vector2 coordinates);
     int countAdjacentMines(Vector2 coordinates);

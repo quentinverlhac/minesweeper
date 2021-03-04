@@ -3,7 +3,7 @@
 #include <vector>
 #include "Grid.h"
 
-Grid::Grid(Vector2 dimensions, int numberOfMines) : m_dimensions(dimensions), m_numberOfMines(numberOfMines)
+Grid::Grid(Vector2 dimensions, int numberOfMines) : m_dimensions(dimensions), m_numberOfMines(numberOfMines), m_numberOfCellsRevealed(0)
 {
     this->m_cells = new Cell[this->getNumberOfCells()];
 };
@@ -168,6 +168,16 @@ int Grid::getNumberOfMines()
     return this->m_numberOfMines;
 }
 
+int Grid::getNumberOfEmptyCells()
+{
+    return this->getNumberOfCells() - this->getNumberOfMines();
+}
+
+int Grid::getNumberOfRemainingEmptyCells()
+{
+    return this->getNumberOfEmptyCells() - this->m_numberOfCellsRevealed;
+}
+
 // initializeMines uses Floyd sample without replacement algorithm to randomly select m_numberOfMines cells and initialize them as mines
 void Grid::initializeMines()
 {
@@ -201,6 +211,7 @@ bool Grid::processMove(Vector2 coordinates)
         return cell->isMine;
     }
     cell->isRevealed = true;
+    this->m_numberOfCellsRevealed += 1;
     if (cell->isMine)
     {
         return true;
