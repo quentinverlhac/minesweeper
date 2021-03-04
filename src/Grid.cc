@@ -195,6 +195,11 @@ void Grid::initializeMines()
 bool Grid::processMove(Vector2 coordinates)
 {
     auto cell = this->getCell(coordinates);
+    if (cell->isRevealed)
+    {
+        // prevent from infinite loop during propagation
+        return cell->isMine;
+    }
     cell->isRevealed = true;
     if (cell->isMine)
     {
