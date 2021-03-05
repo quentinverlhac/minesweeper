@@ -17,4 +17,5 @@ public:
     char getCellChar(Cell *cell);
     Vector2 promptNextMove();
     int promptInt(std::string prompt);
+    int promptCoordinate(std::string prompt);
 };

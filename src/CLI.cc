@@ -90,11 +90,25 @@ int CLI::promptInt(std::string prompt)
     return output;
 }
 
+int CLI::promptCoordinate(std::string prompt)
+{
+    int coordinate = -1;
+    do
+    {
+        coordinate = this->promptInt(prompt);
+        if (coordinate < 0 || coordinate >= this->m_grid.getDimensions().i)
+        {
+            std::cout << "Please enter a number within 0 and " << m_grid.getDimensions().i - 1 << std::endl;
+        }
+    } while (coordinate < 0 || coordinate >= this->m_grid.getDimensions().i);
+    return coordinate;
+}
+
 Vector2 CLI::promptNextMove()
 {
     std::cout << "Next move ?" << std::endl;
-    int row = this->promptInt("Enter a row: ");
-    int column = this->promptInt("Enter a column: ");
+    int row = this->promptCoordinate("Enter a row: ");
+    int column = this->promptCoordinate("Enter a column: ");
     std::cout << "Move: " << row << "," << column << std::endl;
     return {row, column};
 };
