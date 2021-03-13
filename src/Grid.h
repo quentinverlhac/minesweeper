@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "Cell.h"
 
 struct Vector2
@@ -23,12 +24,12 @@ class Grid
     Vector2 m_dimensions;
     int m_numberOfMines;
     int m_numberOfCellsRevealed;
-    std::vector<Cell> m_cells; // TODO use smart_pointers to protect this
+    std::vector<std::shared_ptr<Cell>> m_cells;
 
 public:
     Grid(Vector2 dimensions, int numberOfMines);
     ~Grid();
-    Cell *getCell(Vector2 coordinates);
+    std::shared_ptr<Cell> getCell(Vector2 coordinates);
     std::vector<Vector2> getAdjacentCoordinates(Vector2 coordinates, bool includeDiagonals);
     Vector2 getDimensions();
     int getNumberOfCells();

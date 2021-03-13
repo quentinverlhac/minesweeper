@@ -14,7 +14,7 @@ public:
     void update();
     void endGame(bool hasLost);
     void displayGrid();
-    char getCellChar(Cell *cell);
+    char getCellChar(std::shared_ptr<Cell> cell);
     Vector2 promptNextMove();
     int promptInt(std::string prompt);
     int promptCoordinate(std::string prompt);

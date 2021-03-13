@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include "CLI.h"
 
@@ -42,14 +43,14 @@ void CLI::displayGrid()
         for (int j = 0; j < m_grid.getDimensions().j; j++)
         {
             Vector2 coordinates = {i, j};
-            Cell *cell = m_grid.getCell(coordinates);
+            std::shared_ptr<Cell> cell = m_grid.getCell(coordinates);
             std::cout << getCellChar(cell) << ' ';
         }
         std::cout << std::endl;
     }
 };
 
-char CLI::getCellChar(Cell *cell)
+char CLI::getCellChar(std::shared_ptr<Cell> cell)
 {
     if (cell->isRevealed)
     {

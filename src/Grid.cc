@@ -1,23 +1,28 @@
 #include <random>
 #include <unordered_set>
 #include <vector>
+#include <memory>
 #include "Grid.h"
 
 Grid::Grid(Vector2 dimensions, int numberOfMines) : m_dimensions(dimensions), m_numberOfMines(numberOfMines), m_numberOfCellsRevealed(0)
 {
-    m_cells = std::vector<Cell>(m_dimensions.i * m_dimensions.j);
+    m_cells = std::vector<std::shared_ptr<Cell>>(m_dimensions.i * m_dimensions.j);
+    for (int i = 0; i < m_dimensions.i * m_dimensions.j; ++i)
+    {
+        m_cells[i] = std::make_shared<Cell>(Cell());
+    }
 };
 
 Grid::~Grid(){};
 
 // getCell returns a pointer to the target cell if coordinates are within the grid dimensions, or a pointer to null otherwise.
-Cell *Grid::getCell(Vector2 coordinates)
+std::shared_ptr<Cell> Grid::getCell(Vector2 coordinates)
 {
     if (coordinates.i >= m_dimensions.i || coordinates.j >= m_dimensions.j)
     {
         return nullptr;
     }
-    return &(m_cells[coordinates.i * m_dimensions.j + coordinates.j]);
+    return m_cells[coordinates.i * m_dimensions.j + coordinates.j];
 }
 
 // getAdjacentCoordinates returns a vector of pointers to coordinates that are adjacent to the given coordinates. It takes the Grid limits into account.
@@ -187,13 +192,13 @@ void Grid::initializeMines()
         {
             // rdm is not in the set
             set.insert(rdm);
-            m_cells[rdm].isMine = true;
+            m_cells[rdm]->isMine = true;
         }
         else
         {
             // rdm is in the set, but i is not because it can be sampled for the first time
             set.insert(i);
-            m_cells[i].isMine = true;
+            m_cells[i]->isMine = true;
         }
     }
 }
@@ -235,7 +240,7 @@ int Grid::countAdjacentMines(Vector2 coordinates)
     auto adjacentCoordinates = getAdjacentCoordinates(coordinates, true);
     for (auto i = adjacentCoordinates.begin(); i != adjacentCoordinates.end(); ++i)
     {
-        Cell *cell = getCell(*i);
+        std::shared_ptr<Cell> cell = getCell(*i);
         if (cell->isMine)
         {
             count++;
