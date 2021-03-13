@@ -5,13 +5,10 @@
 
 Grid::Grid(Vector2 dimensions, int numberOfMines) : m_dimensions(dimensions), m_numberOfMines(numberOfMines), m_numberOfCellsRevealed(0)
 {
-    this->m_cells = new Cell[this->getNumberOfCells()];
+    this->m_cells = std::vector<Cell>(this->m_dimensions.i * this->m_dimensions.j);
 };
 
-Grid::~Grid()
-{
-    delete[] this->m_cells;
-};
+Grid::~Grid(){};
 
 // getCell returns a pointer to the target cell if coordinates are within the grid dimensions, or a pointer to null otherwise.
 Cell *Grid::getCell(Vector2 coordinates)

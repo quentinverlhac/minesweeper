@@ -23,7 +23,7 @@ class Grid
     Vector2 m_dimensions;
     int m_numberOfMines;
     int m_numberOfCellsRevealed;
-    Cell *m_cells; // TODO use smart_pointers to protect this
+    std::vector<Cell> m_cells; // TODO use smart_pointers to protect this
 
 public:
     Grid(Vector2 dimensions, int numberOfMines);
