@@ -20,38 +20,38 @@ GameController::~GameController()
 // run is the main game loop.
 void GameController::run()
 {
-    this->initialiseGame();
-    this->m_gameState = gameplay;
-    while (this->m_gameState == gameplay)
+    initialiseGame();
+    m_gameState = gameplay;
+    while (m_gameState == gameplay)
     {
-        this->update();
+        update();
     }
-    this->endGame();
+    endGame();
 }
 
 void GameController::initialiseGame()
 {
-    this->m_cli.initialiseGame();
-    this->m_grid.initializeMines();
+    m_cli.initialiseGame();
+    m_grid.initializeMines();
 }
 
 void GameController::update()
 {
-    this->m_cli.update();
-    this->processNextMove();
+    m_cli.update();
+    processNextMove();
 }
-
+    
 void GameController::endGame()
 {
-    this->m_cli.endGame(this->m_hasLost);
+    m_cli.endGame(m_hasLost);
 }
 
 void GameController::processNextMove()
 {
-    auto move = this->m_cli.promptNextMove();
-    this->m_hasLost = this->m_grid.processMove(move);
-    if (this->m_hasLost || this->m_grid.getNumberOfRemainingEmptyCells() == 0)
+    auto move = m_cli.promptNextMove();
+    m_hasLost = m_grid.processMove(move);
+    if (m_hasLost || m_grid.getNumberOfRemainingEmptyCells() == 0)
     {
-        this->m_gameState = end;
+        m_gameState = end;
     }
 }
