@@ -39,4 +39,5 @@ public:
     void initializeMines();
     bool processMove(Vector2 coordinates);
     int countAdjacentMines(Vector2 coordinates);
+    void revealAllCells();
 };

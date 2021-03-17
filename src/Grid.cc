@@ -248,3 +248,12 @@ int Grid::countAdjacentMines(Vector2 coordinates)
     }
     return count;
 }
+
+void Grid::revealAllCells()
+{
+    for (auto i = m_cells.begin(); i != m_cells.end(); ++i)
+    {
+        (*i)->isRevealed = true;
+        m_numberOfCellsRevealed += 1;
+    }
+}

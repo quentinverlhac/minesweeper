@@ -40,9 +40,10 @@ void GameController::update()
     m_cli.update();
     processNextMove();
 }
-    
+
 void GameController::endGame()
 {
+    m_grid.revealAllCells();
     m_cli.endGame(m_hasLost);
 }
 
