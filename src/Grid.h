@@ -30,13 +30,15 @@ public:
     Grid(Vector2 dimensions, int numberOfMines);
     ~Grid();
     std::shared_ptr<Cell> getCell(Vector2 coordinates);
+    Vector2 getCoordinatesFromIndex(int i);
     std::vector<Vector2> getAdjacentCoordinates(Vector2 coordinates, bool includeDiagonals);
     Vector2 getDimensions();
     int getNumberOfCells();
     int getNumberOfMines();
     int getNumberOfEmptyCells();
     int getNumberOfRemainingEmptyCells();
-    void initializeMines();
+    void initialise();
+    void initialiseMines();
     bool processMove(Vector2 coordinates);
     int countAdjacentMines(Vector2 coordinates);
     void revealAllCells();

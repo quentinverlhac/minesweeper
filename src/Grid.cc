@@ -25,6 +25,12 @@ std::shared_ptr<Cell> Grid::getCell(Vector2 coordinates)
     return m_cells[coordinates.i * m_dimensions.j + coordinates.j];
 }
 
+Vector2 Grid::getCoordinatesFromIndex(int i)
+{
+    // TODO make sure this is within grid dimensions
+    return {(int)i / m_dimensions.i, i % m_dimensions.i};
+}
+
 // getAdjacentCoordinates returns a vector of pointers to coordinates that are adjacent to the given coordinates. It takes the Grid limits into account.
 std::vector<Vector2> Grid::getAdjacentCoordinates(Vector2 coordinates, bool includeDiagonals)
 {
@@ -180,8 +186,18 @@ int Grid::getNumberOfRemainingEmptyCells()
     return getNumberOfEmptyCells() - m_numberOfCellsRevealed;
 }
 
-// initializeMines uses Floyd sample without replacement algorithm to randomly select m_numberOfMines cells and initialize them as mines
-void Grid::initializeMines()
+// initialise set up the grid by initialising the mines and the hint values of each cell
+void Grid::initialise()
+{
+    initialiseMines();
+    for (auto i = 0; i < m_cells.size(); ++i)
+    {
+        m_cells[i]->hintLabel = countAdjacentMines(getCoordinatesFromIndex(i));
+    }
+}
+
+// initialiseMines uses Floyd sample without replacement algorithm to randomly select m_numberOfMines cells and initialize them as mines
+void Grid::initialiseMines()
 {
     std::unordered_set<int> set;
     auto gen = std::mt19937{std::random_device{}()};
@@ -220,7 +236,6 @@ bool Grid::processMove(Vector2 coordinates)
     }
     else
     {
-        cell->hintLabel = countAdjacentMines(coordinates);
         if (cell->hintLabel == 0)
         {
             // adjacent cells are revealed, and so on.. until revealing cells that have adjacent mines

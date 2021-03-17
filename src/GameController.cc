@@ -32,7 +32,7 @@ void GameController::run()
 void GameController::initialiseGame()
 {
     m_cli.initialiseGame();
-    m_grid.initializeMines();
+    m_grid.initialise();
 }
 
 void GameController::update()
