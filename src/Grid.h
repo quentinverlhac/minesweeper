@@ -21,8 +21,8 @@ struct Vector2
 
 class Grid
 {
-    Vector2 m_dimensions;
-    int m_numberOfMines;
+    const Vector2 m_dimensions;
+    const int m_numberOfMines;
     int m_numberOfCellsRevealed;
     std::vector<std::shared_ptr<Cell>> m_cells;
 
